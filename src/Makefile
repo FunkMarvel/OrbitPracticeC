@@ -6,8 +6,8 @@ FLAGS = -Wall -O3
 
 all: main.exe
 
-main.exe: main.o integrate.o
-	$(CC) main.o integrate.o -o main.exe
+main.exe: main.o integrate.o extrafunc.o
+	$(CC) main.o integrate.o extrafunc.o -o main.exe
 
 main.o: main.c
 	$(CC) $(FLAGS) main.c -c
@@ -15,9 +15,11 @@ main.o: main.c
 integrate.o: integrate.c
 	$(CC) $(FLAGS) integrate.c -c
 
+extrafunc.o: extrafunc.c
+	$(CC) $(FLAGS) extrafunc.c -c
 
 clean :
 	rm -f *.o
 	rm -f *.exe
-	
+
 print-%  : ; @echo $* = $($*)
