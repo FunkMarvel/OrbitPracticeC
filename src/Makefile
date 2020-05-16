@@ -7,10 +7,10 @@ FLAGS = -Wall -O3
 all: main.exe
 
 main.exe: main.o integrate.o extrafunc.o writefile.o
-	$(CC) main.o integrate.o extrafunc.o writefile.o -o main.exe -lm
+	$(PCC) $(FLAGS) main.o integrate.o extrafunc.o writefile.o -o main.exe -lm
 
 main.o: main.c
-	$(CC) $(FLAGS) main.c -c
+	$(PCC) $(FLAGS) main.c -c
 
 integrate.o: integrate.c
 	$(CC) $(FLAGS) integrate.c -c
