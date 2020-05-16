@@ -11,4 +11,7 @@ int free2D(double **A);
 
 void populate(double ***A, int n, int m);
 
+// in writefile.c:
+int write_to_file(const char *filename, double *A, int N);
+
 #endif

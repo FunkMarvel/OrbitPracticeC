@@ -2,6 +2,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <math.h>
+#include <errno.h>
 #include "lib.h"
 
 int main(int argc, char const *argv[]) {
@@ -12,10 +13,10 @@ int main(int argc, char const *argv[]) {
   const int sun_mass = 1;
   double dt = T / N;
 
-  double x0 = 1.00000102;
+  double x0 = 1.0166426;
   double y0 = 0.0;
   double vx0 = 0.0;
-  double vy0 = 6.28;
+  double vy0 = 6.18068911;
 
   double *X = malloc(N*sizeof(X));
   double *Y = malloc(N*sizeof(Y));
@@ -30,15 +31,18 @@ int main(int argc, char const *argv[]) {
   Vy[0] = vy0;
 
   integrate(T, dt, N, &X, &Y, &Vx, &Vy, G, sun_mass);
-  for (size_t i = 0; i < 4; i++) {
-    printf("(%lf,%lf)\n", X[i],Y[i]);
-    printf("[%lf,%lf]\n", Vx[i],Vy[i]);
-  }
 
-  free(X);
-  free(Y);
   free(Vx);
   free(Vy);
+
+  const char *xfile = "X.bin";
+  const char *yfile = "Y.bin";
+
+  write_to_file(xfile, X, N);
+  free(X);
+
+  write_to_file(yfile, Y, N);
+  free(Y);
 
   return 0;
 }
